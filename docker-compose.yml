@@ -1,0 +1,33 @@
+version: '3.9'
+
+services: 
+  nginx:
+    image: nginx:1.21
+    ports: 
+      - 80:80
+
+  react:
+    build: ./react
+    ports:
+      - 8080:8080
+    volumes:
+      - ./react:/app
+
+  express:
+    build: ./express
+    ports:
+      - 3000:3000
+    volumes:
+      - ./express:/app
+  
+  postgres:
+    image: postgres:13.3
+    environment:
+      - POSTGRES_DB=test_db
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=test_password
+    ports:
+      - 5432:5432
+
+    
+      
